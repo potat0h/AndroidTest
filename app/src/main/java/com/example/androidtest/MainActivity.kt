@@ -8,13 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.content.Context
+import android.content.Intent
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
     private var counter = 0
     private lateinit var textViewCounter: TextView
+    private lateinit var plainTextName: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         textViewCounter = findViewById(R.id.textViewCounter)
         val buttonUp = findViewById<Button>(R.id.buttonUp)
         val buttonDown = findViewById<Button>(R.id.buttonDown)
+        plainTextName = findViewById<EditText>(R.id.plainTextName)
 
         // Učitavanje spremljene vrijednosti iz SharedPreferences
         val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
@@ -33,6 +37,15 @@ class MainActivity : AppCompatActivity() {
         buttonUp.setOnClickListener {
             counter++
             textViewCounter.text = counter.toString()
+            if (counter == 10) {
+                val name = plainTextName.text?.toString() ?: ""
+                val intent = Intent(this, SuccessActivity::class.java)
+                intent.putExtra("NAME", name)
+                startActivity(intent)
+
+                counter = 0
+                textViewCounter.text = counter.toString()
+            }
         }
 
         buttonDown.setOnClickListener {
