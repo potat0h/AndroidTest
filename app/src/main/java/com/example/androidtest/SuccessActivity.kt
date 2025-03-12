@@ -20,7 +20,7 @@ class SuccessActivity : AppCompatActivity() {
 
         val buttonSendSMS = findViewById<Button>(R.id.buttonSendSMS)
         buttonSendSMS.setOnClickListener {
-            val phoneNumber = "0957918021"  // Zamijeni sa svojim brojem
+            val phoneNumber = "0957918021" // Zamijenite sa svojim brojem
             val smsIntent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("smsto:$phoneNumber")
                 putExtra("sms_body", message)

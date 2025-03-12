@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/running_abstract"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -19,10 +20,12 @@
 
         <TextView
             android:id="@+id/textViewCounter"
-            android:layout_width="155dp"
+            android:layout_width="27dp"
             android:layout_height="wrap_content"
+            android:background="?colorSecondary"
+            android:text="0"
             android:textAlignment="center"
-            android:text="TextView" />
+            android:textColor="?colorOnSecondary" />
 
         <Button
             android:id="@+id/buttonUp"
@@ -34,7 +37,7 @@
             android:id="@+id/buttonDown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="DOWN" />
 
         <EditText
             android:id="@+id/plainTextName"
@@ -42,9 +45,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonDown" />
+
+            android:background="?colorSecondary"
+            android:textColor="?colorOnSecondary"/>
 
     </LinearLayout>
 

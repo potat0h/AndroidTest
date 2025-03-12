@@ -9,6 +9,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.content.Context
 import android.content.Intent
+import android.view.ContextMenu
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -34,6 +38,9 @@ class MainActivity : AppCompatActivity() {
         counter = sharedPreferences.getInt("COUNTER_VALUE", 0)
         textViewCounter.text = counter.toString()
 
+        // Registracija kontekstualnog izbornika za textViewCounter
+        registerForContextMenu(textViewCounter)
+
         buttonUp.setOnClickListener {
             counter++
             textViewCounter.text = counter.toString()
@@ -54,6 +61,44 @@ class MainActivity : AppCompatActivity() {
                 textViewCounter.text = counter.toString()
             }
         }
+    }
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        menuInflater.inflate(R.menu.menu_float, menu)
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.reset_counter -> {
+                // Resetiranje broja na nulu
+                counter = 0
+                textViewCounter.text = counter.toString()
+                true
+            }
+            else -> super.onContextItemSelected(item)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.restore_counter -> {
+                counter = 0
+                textViewCounter.text = counter.toString()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     // Spremanje trenutnog brojača prilikom promjene orijentacije
