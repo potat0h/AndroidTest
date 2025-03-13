@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
@@ -16,10 +17,12 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
     private var counter = 0
+    private var isEnglish = true
     private lateinit var textViewCounter: TextView
     private lateinit var plainTextName: EditText
 
@@ -32,6 +35,10 @@ class MainActivity : AppCompatActivity() {
         val buttonUp = findViewById<Button>(R.id.buttonUp)
         val buttonDown = findViewById<Button>(R.id.buttonDown)
         plainTextName = findViewById<EditText>(R.id.plainTextName)
+
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
 
         // Učitavanje spremljene vrijednosti iz SharedPreferences
         val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
@@ -48,6 +55,7 @@ class MainActivity : AppCompatActivity() {
                 val name = plainTextName.text?.toString() ?: ""
                 val intent = Intent(this, SuccessActivity::class.java)
                 intent.putExtra("NAME", name)
+                intent.putExtra("IS_ENGLISH", isEnglish)
                 startActivity(intent)
 
                 counter = 0
@@ -62,6 +70,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun changeLanguage() {
+        isEnglish = !isEnglish
+
+        // Ažuriranje tekstova gumba
+        findViewById<Button>(R.id.buttonUp).text = if (isEnglish) "UP" else "GORE"
+        findViewById<Button>(R.id.buttonDown).text = if (isEnglish) "DOWN" else "DOLJE"
+        findViewById<EditText>(R.id.plainTextName).hint = if (isEnglish) "Name" else "Ime"
+
+        // Ažuriranje izbornika
+        invalidateOptionsMenu()
+    }
+
 
     override fun onCreateContextMenu(
         menu: ContextMenu?,
@@ -85,16 +106,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu_main, menu)
-        return super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.menu_main, menu)
+        menu.findItem(R.id.restore_counter).title = if (isEnglish) "Reset" else "Resetiraj"
+        menu.findItem(R.id.croatian).title = if (isEnglish) "Croatian" else "Hrvatski"
+        menu.findItem(R.id.english).title = if (isEnglish) "English" else "Engleski"
+        return true
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.restore_counter -> {
                 counter = 0
                 textViewCounter.text = counter.toString()
+                return true
+            }
+            R.id.croatian -> {
+                if (isEnglish) changeLanguage()
+                return true
+            }
+            R.id.english -> {
+                if (!isEnglish) changeLanguage()
                 return true
             }
         }
