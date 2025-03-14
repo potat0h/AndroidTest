@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -12,24 +14,25 @@ class SuccessActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_success)
 
-        val isEnglish = intent.getBooleanExtra("IS_ENGLISH", true)
         val name = intent.getStringExtra("NAME") ?: "User"
-        val message = if (isEnglish)
-            "$name, you have successfully reached 10 steps."
-        else
-            "$name, uspješno ste došli do 10 koraka."
+        val message = getString(R.string.success, name)
 
-        findViewById<TextView>(R.id.textViewMessage).text = message
+        val textViewMessage = findViewById<TextView>(R.id.textViewMessage)
+        textViewMessage.text = message
 
+        val radioGroup = findViewById<RadioGroup>(R.id.radioGroupPhoneNumbers)
         val buttonSendSMS = findViewById<Button>(R.id.buttonSendSMS)
-        buttonSendSMS.text = if (isEnglish) "Send SMS" else "Pošalji SMS"
         buttonSendSMS.setOnClickListener {
-            val phoneNumber = "0957918021" // Zamijenite sa svojim brojem
-            val smsIntent = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("smsto:$phoneNumber")
-                putExtra("sms_body", message)
+            val selectedId = radioGroup.checkedRadioButtonId
+            if (selectedId != -1) {
+                val radioButton = findViewById<RadioButton>(selectedId)
+                val phoneNumber = radioButton.text.toString()
+                val smsIntent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("smsto:$phoneNumber")
+                    putExtra("sms_body", message)
+                }
+                startActivity(smsIntent)
             }
-            startActivity(smsIntent)
         }
     }
 }

@@ -46,20 +46,20 @@
             android:id="@+id/buttonUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="UP" />
+            android:text="@string/up" />
 
         <Button
             android:id="@+id/buttonDown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DOWN" />
+            android:text="@string/down" />
 
         <EditText
             android:id="@+id/plainTextName"
             android:layout_width="111dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Name"
+            android:hint="@string/name"
 
             android:background="?colorSecondary"
             android:textColor="?colorOnSecondary"/>

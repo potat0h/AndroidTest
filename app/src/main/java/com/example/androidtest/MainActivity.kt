@@ -71,16 +71,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun changeLanguage() {
-        isEnglish = !isEnglish
-
-        // Ažuriranje tekstova gumba
-        findViewById<Button>(R.id.buttonUp).text = if (isEnglish) "UP" else "GORE"
-        findViewById<Button>(R.id.buttonDown).text = if (isEnglish) "DOWN" else "DOLJE"
-        findViewById<EditText>(R.id.plainTextName).hint = if (isEnglish) "Name" else "Ime"
-
-        // Ažuriranje izbornika
-        invalidateOptionsMenu()
+    @Suppress("DEPRECATION")
+    fun changeLanguage(context: Context, language: String) {
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val res = context.resources
+        val config = android.content.res.Configuration(res.configuration)
+        config.setLocale(locale)
+        res.updateConfiguration(config, res.displayMetrics)
     }
 
 
@@ -107,9 +105,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
-        menu.findItem(R.id.restore_counter).title = if (isEnglish) "Reset" else "Resetiraj"
-        menu.findItem(R.id.croatian).title = if (isEnglish) "Croatian" else "Hrvatski"
-        menu.findItem(R.id.english).title = if (isEnglish) "English" else "Engleski"
         return true
     }
 
@@ -122,16 +117,19 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.croatian -> {
-                if (isEnglish) changeLanguage()
+                changeLanguage(this, "hr") // Promjena jezika na hrvatski
+                recreate() // Ponovno stvaranje aktivnosti da se primijene promjene
                 return true
             }
             R.id.english -> {
-                if (!isEnglish) changeLanguage()
+                changeLanguage(this, "en") // Promjena jezika na engleski
+                recreate() // Ponovno stvaranje aktivnosti da se primijene promjene
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
     }
+
 
     // Spremanje trenutnog brojača prilikom promjene orijentacije
     override fun onSaveInstanceState(outState: Bundle) {

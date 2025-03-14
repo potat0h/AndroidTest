@@ -26,17 +26,45 @@
             android:id="@+id/textViewMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Success!"
+            android:text="@string/success"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/white"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupPhoneNumbers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="123456789"
+                android:textColor="@color/white"/>
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="987654321"
+                android:textColor="@color/white"/>
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="555555555"
+                android:textColor="@color/white"/>
+        </RadioGroup>
 
         <Button
             android:id="@+id/buttonSendSMS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Pošalji SMS" />
+            android:text="@string/send_sms" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

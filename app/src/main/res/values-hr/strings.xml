@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="up">GORE</string>
+    <string name="down">DOLJE</string>
+    <string name="name">Ime</string>
+    <string name="success">%1$s, uspješno ste dostigli 10 koraka!</string>
+    <string name="send_sms">Pošalji SMS</string>
+    <string name="reset">Resetiraj</string>
+</resources>

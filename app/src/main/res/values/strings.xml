@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Fit Runner</string>
+    <string name="app_name" translatable="false">Fit Runner</string>
+    <string name="up">UP</string>
+    <string name="down">DOWN</string>
+    <string name="name">Name</string>
+    <string name="success">%1$s, you have successfully reached 10 steps!</string>
+    <string name="send_sms">Send SMS</string>
+    <string name="reset">Reset</string>
 
 </resources>
