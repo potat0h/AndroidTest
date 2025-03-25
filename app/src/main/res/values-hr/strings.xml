@@ -6,4 +6,6 @@
     <string name="success">%1$s, uspješno ste dostigli 10 koraka!</string>
     <string name="send_sms">Pošalji SMS</string>
     <string name="reset">Resetiraj</string>
+    <string name="delete">Izbriši sve podatke</string>
+    <string name="success1"> su uspješno dostigli 10 koraka! </string>
 </resources>

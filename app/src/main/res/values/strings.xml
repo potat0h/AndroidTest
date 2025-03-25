@@ -7,5 +7,7 @@
     <string name="success">%1$s, you have successfully reached 10 steps!</string>
     <string name="send_sms">Send SMS</string>
     <string name="reset">Reset</string>
+    <string name="delete">Delete all data</string>
+    <string name="success1">have successfully reached 10 steps!</string>
 
 </resources>

@@ -17,8 +17,17 @@ class SuccessActivity : AppCompatActivity() {
         val name = intent.getStringExtra("NAME") ?: "User"
         val message = getString(R.string.success, name)
 
+        val databaseHelper = DatabaseHelper(this)
+        val successfulUsers = databaseHelper.getSuccessfulUsers()
+
+        val buttonDeleteData = findViewById<Button>(R.id.buttonDeleteData)
+        buttonDeleteData.setOnClickListener {
+            databaseHelper.deleteAllData()
+            findViewById<TextView>(R.id.textViewMessage).text = ""
+        }
         val textViewMessage = findViewById<TextView>(R.id.textViewMessage)
-        textViewMessage.text = message
+        textViewMessage.text = successfulUsers.joinToString(", ") { it }
+
 
         val radioGroup = findViewById<RadioGroup>(R.id.radioGroupPhoneNumbers)
         val buttonSendSMS = findViewById<Button>(R.id.buttonSendSMS)

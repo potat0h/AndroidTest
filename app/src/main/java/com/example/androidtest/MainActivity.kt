@@ -11,6 +11,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.view.ContextMenu
+import android.view.HapticFeedbackConstants
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -39,6 +40,14 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        val databaseHelper = DatabaseHelper(this)
+
+        if(databaseHelper.isDatabaseEmpty()){
+            databaseHelper.insertData("Alaj", 10)
+            databaseHelper.insertData("Bobek", 10)
+            databaseHelper.insertData("Charlie", 10)
+        }
+
 
         // Učitavanje spremljene vrijednosti iz SharedPreferences
         val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
@@ -49,10 +58,13 @@ class MainActivity : AppCompatActivity() {
         registerForContextMenu(textViewCounter)
 
         buttonUp.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
             counter++
             textViewCounter.text = counter.toString()
             if (counter == 10) {
                 val name = plainTextName.text?.toString() ?: ""
+
+                databaseHelper.insertData(name, counter)
                 val intent = Intent(this, SuccessActivity::class.java)
                 intent.putExtra("NAME", name)
                 intent.putExtra("IS_ENGLISH", isEnglish)
@@ -64,6 +76,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonDown.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
             if (counter > 0) {
                 counter--
                 textViewCounter.text = counter.toString()

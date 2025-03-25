@@ -31,6 +31,15 @@
             android:textStyle="bold"
             android:textColor="@color/white"/>
 
+        <TextView
+            android:id="@+id/textViewMessage1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/success1"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
         <RadioGroup
             android:id="@+id/radioGroupPhoneNumbers"
             android:layout_width="wrap_content"
@@ -65,6 +74,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/send_sms" />
+
+        <Button
+            android:id="@+id/buttonDeleteData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            android:layout_marginTop="16dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
