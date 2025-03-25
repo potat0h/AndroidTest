@@ -9,5 +9,6 @@
     <string name="reset">Reset</string>
     <string name="delete">Delete all data</string>
     <string name="success1">have successfully reached 10 steps!</string>
+    <string name="empty">Empty</string>
 
 </resources>

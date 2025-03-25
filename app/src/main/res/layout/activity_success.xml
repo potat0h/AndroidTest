@@ -32,7 +32,7 @@
             android:textColor="@color/white"/>
 
         <TextView
-            android:id="@+id/textViewMessage1"
+            android:id="@+id/textViewMessageDown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/success1"

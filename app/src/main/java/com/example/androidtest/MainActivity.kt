@@ -32,6 +32,10 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        window.decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_FULLSCREEN
+                )
+
         textViewCounter = findViewById(R.id.textViewCounter)
         val buttonUp = findViewById<Button>(R.id.buttonUp)
         val buttonDown = findViewById<Button>(R.id.buttonDown)

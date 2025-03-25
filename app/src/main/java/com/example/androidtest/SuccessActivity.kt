@@ -19,15 +19,21 @@ class SuccessActivity : AppCompatActivity() {
 
         val databaseHelper = DatabaseHelper(this)
         val successfulUsers = databaseHelper.getSuccessfulUsers()
+        val textViewMessage = findViewById<TextView>(R.id.textViewMessage)
+        val textViewMessageDown = findViewById<TextView>(R.id.textViewMessageDown)
 
         val buttonDeleteData = findViewById<Button>(R.id.buttonDeleteData)
         buttonDeleteData.setOnClickListener {
             databaseHelper.deleteAllData()
-            findViewById<TextView>(R.id.textViewMessage).text = ""
+            textViewMessage.text = ""
+            textViewMessageDown.text = getString(R.string.empty)
         }
-        val textViewMessage = findViewById<TextView>(R.id.textViewMessage)
+
         textViewMessage.text = successfulUsers.joinToString(", ") { it }
 
+        if(databaseHelper.isDatabaseEmpty()){
+            textViewMessageDown.text = getString(R.string.empty)
+        }
 
         val radioGroup = findViewById<RadioGroup>(R.id.radioGroupPhoneNumbers)
         val buttonSendSMS = findViewById<Button>(R.id.buttonSendSMS)

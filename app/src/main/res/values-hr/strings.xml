@@ -8,4 +8,5 @@
     <string name="reset">Resetiraj</string>
     <string name="delete">Izbriši sve podatke</string>
     <string name="success1"> su uspješno dostigli 10 koraka! </string>
+    <string name="empty">Prazno</string>
 </resources>
